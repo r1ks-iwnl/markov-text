@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/5306729/how-do-markov-chain-chatbots-work
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map#examples
+https://github.com/moon-rays/markov-chat/blob/main/markov.js
