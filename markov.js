@@ -6,14 +6,21 @@ function prob(percent) {
 
 function markov(text) {
     let words = text.split(" ");
-    let markovChain = new Map();// TODO: get a key to have more than 1 possible value
+    let markovChain = new Map();
     let result = [];
     for(i = 0; i < words.length; i++ ) {
         if(words[i + 2] != undefined) {
-            markovChain.set(`${words[i]} ${words[i+1]}`, words[i+2]);
+            if(markovChain.has(`${words[i]} ${words[i+1]}`)) { //so keys don't get overwritten values
+                const flatNewValue = [words[i+2], markovChain.get(`${words[i]} ${words[i+1]}`)].flat()
+                markovChain.set(
+                    `${words[i]} ${words[i+1]}`,
+                    flatNewValue
+                );
+            }
+            else markovChain.set(`${words[i]} ${words[i+1]}`, words[i+2]);
         }
     }
-    result.push(Array.from(markovChain.keys())[0]);
+    result.push(Array.from(markovChain.keys())[0]); //add support for keys with multiple values
     for(i = 0; i < markovChain.size; i++) {
         if(prob(50)) {
             result.push(markovChain.get(Array.from(markovChain.keys())[i]));
@@ -23,4 +30,4 @@ function markov(text) {
     console.log(markovChain);
     console.log(result);
 }
-markov("a a b c")
+markov("a a a a b c d")
