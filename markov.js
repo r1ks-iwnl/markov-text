@@ -23,7 +23,7 @@ function markov(text) {
     result.push(Array.from(markovChain.keys())[0]);
     for(i = 0; i < markovChain.size; i++) {
         const valueLength = markovChain.get(Array.from(markovChain.keys())[i]).length;
-        if(markovChain.get(Array.from(markovChain.keys())[i]).length > 1) {//pick a value for keys with multiple values
+        if(markovChain.get(Array.from(markovChain.keys())[i]).constructor === Array) {//pick a value for keys with multiple values. Code kinda scuffed?
             result.push(markovChain.get(
                 Array.from(markovChain.keys())[i])
                 [Math.floor(valueLength * Math.random())]
@@ -33,7 +33,8 @@ function markov(text) {
             result.push(markovChain.get(Array.from(markovChain.keys())[i]));
         } // i have no clue if the RNG is random enough
     }
+    result = result.join(" ")
     console.log(markovChain);
     console.log(result);
 }
-markov("a a a a b c d")
+markov("talking about fusion, i just remembed that these setups exist. They whould have been great to place between the heat pipes leading to the different chambers")
